@@ -2,14 +2,23 @@ import React from "react";
 import classes from "./BurgerIngredient.css";
 import PropType from 'prop-types'
 
+export const INGREDIENT_LIST = {
+  BREAD_BOTTOM: 'bread-bottom',
+  BREAD_TOP: 'bread-top',
+  MEAT: 'meat',
+  CHEESE: 'cheese',
+  SALAD: 'salad',
+  BACON: 'bacon',
+}
+
 const BurgerIngredient = props => {
   let ingredient = null;
   
   switch (props.type) {
-    case 'bread-bottom':
+    case INGREDIENT_LIST.BREAD_BOTTOM:
       ingredient = <div className={classes.BreadBottom}></div>;
       break;
-    case 'bread-top':
+    case INGREDIENT_LIST.BREAD_TOP:
       ingredient = (
         <div className={classes.BreadTop}>
           <div className={classes.Seeds1}></div>
@@ -17,16 +26,16 @@ const BurgerIngredient = props => {
         </div>
       );
       break;
-    case 'meat':
+    case INGREDIENT_LIST.MEAT:
       ingredient = <div className={classes.Meat}></div>
       break;
-    case 'cheese':
+    case INGREDIENT_LIST.CHEESE:
     ingredient = <div className={classes.Cheese}></div>
       break;
-    case 'salad':
+    case INGREDIENT_LIST.SALAD:
       ingredient = <div className={classes.Salad}></div>
       break;
-    case 'bacon':
+    case INGREDIENT_LIST.BACON:
       ingredient = <div className={classes.Bacon}></div>
       break;
     default: 
