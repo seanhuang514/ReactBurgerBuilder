@@ -32,6 +32,8 @@ const BurgerIngredient = props => {
     default: 
       ingredient = null;
   }
+
+  return ingredient
 };
 
 BurgerIngredient.PropType = {
