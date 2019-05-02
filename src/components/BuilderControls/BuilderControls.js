@@ -5,10 +5,10 @@ import classes from './BuilderControls.css';
 
 const BuilderControls = props => {
   const controls = [
-    { label: INGREDIENT_LIST.BACON, type: INGREDIENT_LIST.BACON },
-    { label: INGREDIENT_LIST.CHEESE, type: INGREDIENT_LIST.CHEESE },
-    { label: INGREDIENT_LIST.SALAD, type: INGREDIENT_LIST.SALAD },
-    { label: INGREDIENT_LIST.MEAT, type: INGREDIENT_LIST.MEAT },
+    { label: INGREDIENT_LIST.bacon.name },
+    { label: INGREDIENT_LIST.cheese.name },
+    { label: INGREDIENT_LIST.salad.name },
+    { label: INGREDIENT_LIST.meat.name },
   ]
   return (
     <div className={classes.BuilderControls}>

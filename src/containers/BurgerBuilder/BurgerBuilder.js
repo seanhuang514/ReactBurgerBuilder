@@ -6,10 +6,10 @@ import BuilderControls from '../../components/BuilderControls/BuilderControls'
 class BurgerBuilder extends Component {
   state = {
     ingredients: {
-      bacon: 1,
-      cheese: 2,
-      salad: 1,
-      meat: 2
+      [INGREDIENT_LIST.bacon.name]: 1,
+      [INGREDIENT_LIST.cheese.name]: 1,
+      [INGREDIENT_LIST.salad.name]: 1,
+      [INGREDIENT_LIST.meat.name]: 1
     }
   }
   render () {
