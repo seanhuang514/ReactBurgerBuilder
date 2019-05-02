@@ -1,7 +1,6 @@
 import React from 'react';
 import BurgerIngredient, { INGREDIENT_LIST } from './BurgerIngredient/BurgerIngredient';
 import classes from './Burger.css';
-import { _ } from 'core-js';
 
 const Burger = props => {
 
