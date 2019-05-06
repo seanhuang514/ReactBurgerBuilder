@@ -3,7 +3,8 @@ import Aux from '../../hoc/Aux'
 import Burger from '../../components/Burger/Burger'
 import BuilderControls from '../../components/BuilderControls/BuilderControls'
 import { INGREDIENT_LIST } from '../../components/Burger/BurgerIngredient/BurgerIngredient'
-
+import Modal from '../../components/ui/Model/Modal';
+import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary'
 class BurgerBuilder extends Component {
   state = {
     ingredients: {
@@ -70,6 +71,9 @@ class BurgerBuilder extends Component {
   render () {
     return (
       <Aux>
+        <Modal>
+          <OrderSummary ingredients={this.state.ingredients}></OrderSummary>
+        </Modal>
         <Burger ingredients={this.state.ingredients}/>
         <BuilderControls
           ingredientAdded={this.addIngredientHandler}
