@@ -17,7 +17,9 @@ const BuilderControls = props => {
           return <BuilderControl
                     key={control.label}
                     label={control.label}
-                    ingredientAdded={props.ingredientAdded} />
+                    ingredientAdded={props.ingredientAdded}
+                    ingredientRemoved={props.ingredientRemoved}
+                    disabled={props.disabledInfo[control.label]} />
         })
       }
     </div>
