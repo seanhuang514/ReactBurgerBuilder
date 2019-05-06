@@ -1,5 +1,7 @@
 import React from 'react';
 import classes from './Modal.css';
+import Aux from '../../../hoc/Aux'
+import BackDrop from '../BackDrop/BackDrop'
 
 const Modal = props => {
   const animationStyle = {
@@ -8,9 +10,12 @@ const Modal = props => {
   }
 
   return (
-    <div className={classes.Modal} style={animationStyle}>
-      {props.children}
-    </div>
+    <Aux>
+      <BackDrop show={props.show} modalClose={props.modalClose}/>
+      <div className={classes.Modal} style={animationStyle}>
+        {props.children}
+      </div>
+    </Aux>
   )
 }
 
