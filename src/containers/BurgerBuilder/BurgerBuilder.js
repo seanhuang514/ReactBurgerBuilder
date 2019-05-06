@@ -12,7 +12,14 @@ class BurgerBuilder extends Component {
       [INGREDIENT_LIST.salad.name]: 1,
       [INGREDIENT_LIST.meat.name]: 1
     },
-    totalPrice: 4
+    totalPrice: 4,
+    purchaseable: true
+  }
+
+  updatePurchaseState (ingredients) {
+    const ingredientsQuantity = Object.values(ingredients).reduce((sum, el) => sum + el, 0);
+    console.log('ingredientsQuantity', ingredientsQuantity)
+    this.setState({ purchaseable: ingredientsQuantity > 0 })
   }
 
   addIngredientHandler = (type) => {
@@ -25,6 +32,12 @@ class BurgerBuilder extends Component {
     const newTotalPrice = oldTotalPrice + INGREDIENT_LIST[type].price;
     
     this.setState({ ingredients: newIngredients, totalPrice: newTotalPrice })
+    /* 
+      Do not pass this.state.ingredients to updatePurchaseState
+      because of setState is asynchronous, you might pass old ingredients
+      to updatePurchaseState, so use newIngredients to make sure it is newest ingredients
+    */
+    this.updatePurchaseState(newIngredients)
   }
 
   removeIngredientHandler = (type) => {
@@ -40,6 +53,7 @@ class BurgerBuilder extends Component {
     const newTotalPrice = oldTotalPrice - INGREDIENT_LIST[type].price;
     
     this.setState({ ingredients: newIngredients, totalPrice: newTotalPrice })
+    this.updatePurchaseState(newIngredients)
   }
 
   disabledInfo = () => {
@@ -61,7 +75,8 @@ class BurgerBuilder extends Component {
           ingredientAdded={this.addIngredientHandler}
           ingredientRemoved={this.removeIngredientHandler}
           disabledInfo={this.disabledInfo()} 
-          totalPrice={this.state.totalPrice}/>
+          totalPrice={this.state.totalPrice}
+          purchaseable={this.state.purchaseable}/>
       </Aux>
     )
   }
