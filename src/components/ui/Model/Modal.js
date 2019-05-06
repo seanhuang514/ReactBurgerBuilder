@@ -1,22 +1,36 @@
-import React from 'react';
+import React, { Component } from 'react';
 import classes from './Modal.css';
 import Aux from '../../../hoc/Aux'
 import BackDrop from '../BackDrop/BackDrop'
 
-const Modal = props => {
-  const animationStyle = {
-    transform: props.show ? 'translateY(0)' : 'translateY(-100vh)',
-    opacity: props.show ? '1' : '0'
+class Modal extends Component {
+  shouldComponentUpdate (nextProps, nextState) {
+    /* if state change then re-render component and child component */
+    return nextProps.show !== this.props.show
   }
 
-  return (
-    <Aux>
-      <BackDrop show={props.show} modalClose={props.modalClose}/>
-      <div className={classes.Modal} style={animationStyle}>
-        {props.children}
-      </div>
-    </Aux>
-  )
+  componentWillUpdate () {
+    console.log('[Modal.js] - componentWillUpdate')
+  }
+
+  /* won't updated, this.props.show always false */
+  // animationStyle = this.props.show
+
+  render () {
+    const animationStyle = {
+      transform: this.props.show ? 'translateY(0)' : 'translateY(-100vh)',
+      opacity: this.props.show ? '1' : '0'
+    }
+
+    return (
+      <Aux>
+        <BackDrop show={this.props.show} modalClose={this.props.modalClose}/>
+        <div className={classes.Modal} style={animationStyle}>
+          {this.props.children}
+        </div>
+      </Aux>
+    )
+  }
 }
 
 export default Modal
