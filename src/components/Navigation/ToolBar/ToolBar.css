@@ -20,3 +20,10 @@
 .logo {
   height: 80%
 }
+
+@media (max-width: 499px) {
+  /* mobile */
+  .desktopOnly {
+    display: none;
+  }
+}
