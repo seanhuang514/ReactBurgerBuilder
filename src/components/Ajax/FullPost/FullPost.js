@@ -1,24 +1,39 @@
 import React, { Component } from 'react';
-
+import axios from 'axios';
 import classes from './FullPost.css';
 
 class FullPost extends Component {
-    render () {
-        let post = <p style={{ textAlign: 'center' }}>Please select a Post!</p>;
-        if (this.props.id === null) return post;
+  state = {
+    loadedPost: null
+  };
 
-        post = (
-            <div className={classes.FullPost}>
-                <h1>Title</h1>
-                <p>Content</p>
-                <div className={classes.Edit}>
-                    <button className="Delete">Delete</button>
-                </div>
-            </div>
+  componentDidUpdate() {
+    if(!this.props.id || (this.state.loadedPost && this.state.loadedPost.id === this.props.id)) return
 
-        );
-        return post;
-    }
+    axios.get('https://jsonplaceholder.typicode.com/posts/' + this.props.id)
+      .then(response => {
+        this.setState({ loadedPost: response.data });
+      })
+
+    console.log('componentDidUpdate')
+  }
+
+  render() {
+    if(!this.props.id) return <p style={{ textAlign: 'center' }}>Please select a Post!</p>;;
+    if(this.props.id && !this.state.loadedPost) return <p style={{ textAlign: 'center' }}>Loading data ....</p>;
+    
+    
+    const post = (
+      <div className={classes.FullPost}>
+        <h1>{this.state.loadedPost.title}</h1>
+        <p>{this.state.loadedPost.content}</p>
+        <div className={classes.Edit}>
+          <button className="Delete">Delete</button>
+        </div>
+      </div>
+    );
+    return post;
+  }
 }
 
 export default FullPost;
