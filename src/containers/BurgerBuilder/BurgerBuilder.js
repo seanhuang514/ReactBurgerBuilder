@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Aux from '../../hoc/Aux'
+import Aux from '../../hoc/Aux/Aux'
 import Burger from '../../components/Burger/Burger'
 import BuilderControls from '../../components/BuilderControls/BuilderControls'
 import { INGREDIENT_LIST } from '../../components/Burger/BurgerIngredient/BurgerIngredient'

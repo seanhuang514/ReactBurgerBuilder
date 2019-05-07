@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Aux from '../../../hoc/Aux'
+import Aux from '../../../hoc/Aux/Aux'
 import Button from '../../ui/Button/Button'
 
 class OrderSummary extends Component {
@@ -7,8 +7,6 @@ class OrderSummary extends Component {
   componentWillUpdate() {
     console.log('[OrderSummary]-componentWillUpdate');
   }
-
-  
 
   render () {
     const summaries = Object.keys(this.props.ingredients).map(key => {
