@@ -5,6 +5,7 @@ import BuilderControls from '../../components/BuilderControls/BuilderControls'
 import { INGREDIENT_LIST } from '../../components/Burger/BurgerIngredient/BurgerIngredient'
 import Modal from '../../components/ui/Model/Modal';
 import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary'
+import axios from '../../axios-orders';
 class BurgerBuilder extends Component {
   state = {
     ingredients: {
@@ -77,7 +78,22 @@ class BurgerBuilder extends Component {
   }
 
   purchaseContinueHandler = () => {
-    alert('Continue Purchase');
+    const order = {
+      ingredients: this.state.ingredients,
+      totalPrice: this.state.totalPrice,
+      customer: {
+        name: 'sean huang',
+        address: {
+          street: 'test street 1',
+          country: 'Taiwan',
+          zipCode: '12345'
+        },
+        email: 'sean.huang@email.com'
+      },
+      deliveryMethod: 'fastest'
+    }
+
+    axios.post('/orders.json', order);
   }
 
 
