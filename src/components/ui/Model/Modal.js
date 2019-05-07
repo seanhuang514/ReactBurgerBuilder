@@ -6,7 +6,11 @@ import BackDrop from '../BackDrop/BackDrop'
 class Modal extends Component {
   shouldComponentUpdate (nextProps, nextState) {
     /* if state change then re-render component and child component */
-    return nextProps.show !== this.props.show
+    /* 
+      if children state changed but parent state didn't change then won't update
+      view, unless compare props children
+    */    
+    return nextProps.show !== this.props.show || nextProps.children !== this.props.children
   }
 
   componentWillUpdate () {
