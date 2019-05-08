@@ -9,7 +9,8 @@ const WithErrorHandler = (WrappedComponent, axios) => {
       error: null
     }
 
-    componentDidMount() {
+    constructor(){
+      super()
       axios.interceptors.request.use(request => {
         this.setState({ error: null });
 
@@ -18,7 +19,19 @@ const WithErrorHandler = (WrappedComponent, axios) => {
       axios.interceptors.response.use(response => response, error => {
         this.setState({ error: error });
       })
+      
     }
+
+    // componentWillMount() {
+    //   axios.interceptors.request.use(request => {
+    //     this.setState({ error: null });
+
+    //     return request
+    //   })
+    //   axios.interceptors.response.use(response => response, error => {
+    //     this.setState({ error: error });
+    //   })
+    // }
 
     modalCloseHandler = () => {
       this.setState({ error: null });
