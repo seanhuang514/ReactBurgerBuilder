@@ -6,7 +6,7 @@ function App() {
   return (
     <div>
       <Layout>
-        <BurgerBuilder></BurgerBuilder>
+        <BurgerBuilder qqq='123'></BurgerBuilder>
       </Layout>    
     </div>
   );

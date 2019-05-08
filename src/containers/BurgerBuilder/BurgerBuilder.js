@@ -7,6 +7,7 @@ import Modal from '../../components/ui/Model/Modal';
 import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary'
 import axios from '../../axios-orders';
 import Spinner from '../../components/ui/Spinner/Spinner'
+import WithErrorHandler from '../../hoc/WIthErrorHandler/WithErrorHandler'
 class BurgerBuilder extends Component {
   state = {
     ingredients: {
@@ -137,4 +138,4 @@ class BurgerBuilder extends Component {
   }
 }
 
-export default BurgerBuilder
+export default WithErrorHandler(BurgerBuilder, axios)
