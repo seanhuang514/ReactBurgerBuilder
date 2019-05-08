@@ -1,9 +1,7 @@
 import React, { Component } from "react";
-import axios from "../../axios";
+import axios from "../../../axios";
 
-import Post from "../../components/Ajax/Post/Post";
-import FullPost from "../../components/Ajax/FullPost/FullPost";
-import NewPost from "../../components/Ajax/NewPost/NewPost";
+import Post from "../../../components/MyBlog/Post/Post";
 import classes from "./Blog.css";
 
 class Blog extends Component {
@@ -55,12 +53,6 @@ class Blog extends Component {
         </header>
         <section className={classes.Posts}>
           {posts}
-        </section>
-        <section>
-          <FullPost id={this.state.selectedPostId} />
-        </section>
-        <section>
-          <NewPost />
         </section>
       </div>
     );

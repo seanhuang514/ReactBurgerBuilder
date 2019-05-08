@@ -1,11 +1,14 @@
 import React from 'react';
-import Blog from './containers/Blog/Blog';
+import Blog from './containers/MyBlog/Blog/Blog';
+import { BrowserRouter } from 'react-router-dom';
 
 function AjaxApp() {
   return (
-    <div>
-      <Blog /> 
-    </div>
+    <BrowserRouter>
+      <div>
+        <Blog /> 
+      </div>
+    </BrowserRouter>
   );
 }
 
