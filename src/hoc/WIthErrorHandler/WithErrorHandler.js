@@ -11,27 +11,21 @@ const WithErrorHandler = (WrappedComponent, axios) => {
 
     constructor(){
       super()
-      axios.interceptors.request.use(request => {
+      this.requestInterceptor = axios.interceptors.request.use(request => {
         this.setState({ error: null });
 
         return request
       })
-      axios.interceptors.response.use(response => response, error => {
+      this.responseInterceptor = axios.interceptors.response.use(response => response, error => {
         this.setState({ error: error });
       })
       
     }
 
-    // componentWillMount() {
-    //   axios.interceptors.request.use(request => {
-    //     this.setState({ error: null });
-
-    //     return request
-    //   })
-    //   axios.interceptors.response.use(response => response, error => {
-    //     this.setState({ error: error });
-    //   })
-    // }
+    componentWillUnmount(){
+      axios.interceptors.eject(this.requestInterceptor);
+      axios.interceptors.eject(this.responseInterceptor);
+    }
 
     modalCloseHandler = () => {
       this.setState({ error: null });
