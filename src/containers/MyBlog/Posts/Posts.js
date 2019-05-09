@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import classes from './Posts.css'
 import axios from "../../../axios";
 import Post from "../../../components/MyBlog/Post/Post";
-
+import { Link } from 'react-router-dom';
 class Posts extends Component {
   state = {
     posts: [],
@@ -33,10 +33,13 @@ class Posts extends Component {
     if(this.state.error) return <p style={{textAlign: 'center'}}>Something was wrong</p>
   
     return this.state.posts.map(post => {
-      return <Post key={post.id}
-                    title={post.title}
-                    author={post.author}
-                    clicked={() => this.postSelectedHandler(post.id)}/>
+      return (
+        <Link key={post.id} to={'/' + post.id}>
+          <Post title={post.title}
+              author={post.author}
+              clicked={() => this.postSelectedHandler(post.id)}/>
+        </Link>
+      )
     });
   }
 
