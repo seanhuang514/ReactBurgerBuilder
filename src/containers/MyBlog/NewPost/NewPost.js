@@ -19,14 +19,16 @@ class NewPost extends Component {
       }
       axios.post('/posts', payload)
         .then(response => {
-          console.log(response);
-          this.setState({ submitted: true });
+          // console.log(response);
+          // this.setState({ submitted: true });
+          this.props.history.push('/posts') //can go back to previous page
+          // this.props.history.replace('/posts') //can not go back to previous page 
         })
     }
 
     get redirect() {
       if(this.state.submitted) {
-        return <Redirect to="/posts" />
+        return <Redirect to="/posts" /> //can not go back to previous page 
       }else {
         return null
       }
