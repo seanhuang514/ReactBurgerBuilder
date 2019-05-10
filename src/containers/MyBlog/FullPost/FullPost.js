@@ -4,20 +4,26 @@ import classes from './FullPost.css';
 
 class FullPost extends Component {
   state = {
-    loadedPost: null,
-    id: null
+    loadedPost: null
   };
 
   componentDidMount() {
-    const planId = this.props.match.params.id;
-    this.setState({ id: planId }, () => {
-      if(!planId || (this.state.loadedPost && this.state.loadedPost.id === planId)) return
+    this.loadPost();
+  }
 
-      axios.get('/posts/' + planId)
-        .then(response => {
-          this.setState({ loadedPost: response.data });
-        })
-    });
+  componentDidUpdate() {
+    this.loadPost();
+  }
+
+  loadPost() {
+    const planId = this.props.match.params.id;
+
+    if(!planId || (this.state.loadedPost && this.state.loadedPost.id == planId)) return
+
+    axios.get('/posts/' + planId)
+      .then(response => {
+        this.setState({ loadedPost: response.data });
+      })
   }
 
   deletePostHandler = () => {
@@ -29,7 +35,7 @@ class FullPost extends Component {
   }
 
   render() {
-    const planId = this.state.id
+    const planId = this.props.match.params.id
     if(!planId) return <p style={{ textAlign: 'center' }}>Please select a Post!</p>;;
     if(planId && !this.state.loadedPost) return <p style={{ textAlign: 'center' }}>Loading data ....</p>;
     
