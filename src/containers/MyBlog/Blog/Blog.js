@@ -14,7 +14,7 @@ class Blog extends Component {
             <ul>
               {/* <li><a href="/">Home</a></li>
               <li><a href="/new-post">New Post</a></li> */}
-              <li><NavLink exact to="/" activeClassName={classes.active}>Home</NavLink></li>
+              <li><NavLink exact to="/posts" activeClassName={classes.active}>Home</NavLink></li>
               <li>
                 <NavLink 
                   to={{ pathname: '/new-post', hash: 'submit', search: 'q=1' }}
@@ -44,11 +44,9 @@ class Blog extends Component {
         {/* <Route path="/post" exact render={() => <h1>Home1</h1>}/>
         <Route path="/post/qqq" render={() => <h1>Home2</h1>}/> */}
 
-        <Route path="/" exact component={Posts}/>
-
         <Switch>
           <Route path="/new-post" component={NewPost}/>
-          <Route path="/:id" exact component={FullPost}/>
+          <Route path="/posts" component={Posts}/>
         </Switch>
       </div>
     );
