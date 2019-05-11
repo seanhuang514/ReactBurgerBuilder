@@ -1,6 +1,7 @@
 import React from 'react';
 import BurgerIngredient, { INGREDIENT_LIST } from './BurgerIngredient/BurgerIngredient';
 import classes from './Burger.css';
+import { withRouter } from 'react-router-dom'
 
 const Burger = props => {
 
@@ -34,5 +35,5 @@ const Burger = props => {
   )
 }
 
-export default Burger;
+export default withRouter(Burger);
 
