@@ -12,8 +12,8 @@ import * as serviceWorker from './serviceWorker';
 /* 預設content-type */
 // axios.defaults.headers.post['Content-type'] = 'application/json';
 
-// ReactDOM.render(<App />, document.getElementById('root'));
-ReactDOM.render(<AjaxApp />, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('root'));
+// ReactDOM.render(<AjaxApp />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
