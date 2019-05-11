@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import AjaxApp from './AjaxApp';
 import * as serviceWorker from './serviceWorker';
+import { BrowserRouter } from 'react-router-dom';
 
 /* 預設URL */
 // axios.defaults.baseURL = 'https://jsonplaceholder.typicode.com';
@@ -12,7 +13,13 @@ import * as serviceWorker from './serviceWorker';
 /* 預設content-type */
 // axios.defaults.headers.post['Content-type'] = 'application/json';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const app = (
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>
+)
+
+ReactDOM.render(app, document.getElementById('root'));
 // ReactDOM.render(<AjaxApp />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
