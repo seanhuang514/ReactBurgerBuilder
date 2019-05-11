@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import classes from './Checkout.css'
-import CheckoutSummary from '../../components/Order/CheckoutSummary/CheckoutSummary'
+import classes from './Checkout.css';
+import CheckoutSummary from '../../components/Order/CheckoutSummary/CheckoutSummary';
 
 class Checkout extends Component {
   state = {
@@ -10,13 +10,26 @@ class Checkout extends Component {
       meat: 1,
       salad: 1
     }
-  }
-  render () {
+  };
+
+  checkoutCancelHandler = () => {
+    this.props.history.goBack();
+  };
+
+  checkoutContinueHandler = () => {
+    this.props.history.replace('/checkout/continue-checkout');
+  };
+
+  render() {
     return (
       <div>
-        <CheckoutSummary ingredients={this.state.ingredients}/>
+        <CheckoutSummary
+          ingredients={this.state.ingredients}
+          checkoutCancel={this.checkoutCancelHandler}
+          checkoutContinue={this.checkoutContinueHandler}
+        />
       </div>
-    )
+    );
   }
 }
 
