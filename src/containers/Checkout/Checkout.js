@@ -6,13 +6,26 @@ import { Route } from 'react-router-dom';
 
 class Checkout extends Component {
   state = {
-    ingredients: {
-      bacon: 1,
-      cheese: 1,
-      meat: 1,
-      salad: 1
-    }
+    ingredients: null,
+    totalPrice: null
   };
+
+  componentWillMount() {
+    // console.log(this.props);
+    const query = new URLSearchParams(this.props.location.search);
+    let totalPrice = null;
+    let ingredients = {};
+    query.forEach((value, key) => {
+      // console.log(value, key);
+      if (key === 'totalPrice') {
+        totalPrice = value;
+      } else {
+        ingredients[key] = value;
+      }
+    });
+
+    this.setState({ ingredients: ingredients, totalPrice: totalPrice });
+  }
 
   checkoutCancelHandler = () => {
     this.props.history.goBack();
@@ -31,7 +44,11 @@ class Checkout extends Component {
           checkoutContinue={this.checkoutContinueHandler}
         />
 
-        <Route path={this.props.match.url + '/contact-data'} component={ContactData}/>
+        <Route
+          path={this.props.match.url + '/contact-data'}
+          render={() => <ContactData ingredients={this.state.ingredients}
+                                     totalPrice={this.state.totalPrice} />}
+        />
       </div>
     );
   }
