@@ -88,7 +88,7 @@ class ContactData extends Component {
 
     let inputElementOutput = []
     for(const [key, value] of Object.entries(this.state.orderForm)) {
-      inputElementOutput.push(<Input key={key} {...value} />)
+      inputElementOutput.push(<Input key={key} changed={(event) => this.inputChangedHandler(event, key)} {...value} />)
     }
 
     return(
@@ -97,6 +97,19 @@ class ContactData extends Component {
           <Button btnType="Success" clicked={this.orderHandler}>ORDER</Button>
         </form>
     )
+  }
+
+  inputChangedHandler(event, inputIdentify) {
+    // console.log('inputChangedHandler', event.target.value)
+    // console.log('inputChangedHandler', inputIdentify)
+
+    /* 只會 clone orderForm 不會 clone nested object */
+    const cloneOrderFormState = {...this.state.orderForm};
+    /* 必須要在 clone 內層的 object */
+    const cloneElementConfig = {...cloneOrderFormState[inputIdentify]}
+    cloneElementConfig.value = event.target.value;
+    cloneOrderFormState[inputIdentify] = cloneElementConfig
+    this.setState({orderForm: cloneOrderFormState})
   }
 
   render() {
