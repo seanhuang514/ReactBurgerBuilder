@@ -19,7 +19,8 @@ class ContactData extends Component {
         validation: {
           required: true
         },
-        valid: false
+        valid: false,
+        tocuhed: false
       },
       street: {
         elementType: 'input',
@@ -31,7 +32,8 @@ class ContactData extends Component {
         validation: {
           required: true
         },
-        valid: false
+        valid: false,
+        tocuhed: false
       },
       country: {
         elementType: 'input',
@@ -43,7 +45,8 @@ class ContactData extends Component {
         validation: {
           required: true
         },
-        valid: false
+        valid: false,
+        tocuhed: false
       },
       zipCode: {
         elementType: 'input',
@@ -57,7 +60,8 @@ class ContactData extends Component {
           minLength: 5,
           maxLength: 5
         },
-        valid: false
+        valid: false,
+        tocuhed: false
       },
       email: {
         elementType: 'input',
@@ -69,7 +73,8 @@ class ContactData extends Component {
         validation: {
           required: true
         },
-        valid: false
+        valid: false,
+        tocuhed: false
       },
       deliveryMethod: {
         elementType: 'select',
@@ -79,7 +84,8 @@ class ContactData extends Component {
             { value: 'cheapest', displayValue: 'cheapest' }
           ]
         },
-        value: 'faster'
+        value: 'faster',
+        tocuhed: false
       }
     },
     loading: false
@@ -142,6 +148,7 @@ class ContactData extends Component {
     const cloneElementConfig = {...cloneOrderFormState[inputIdentify]}
     cloneElementConfig.value = event.target.value;
     cloneElementConfig.valid = this.checkValidity(cloneElementConfig.value, cloneElementConfig.validation)
+    cloneElementConfig.touched = true
     // console.log('valid', cloneElementConfig.valid)
     cloneOrderFormState[inputIdentify] = cloneElementConfig
     this.setState({orderForm: cloneOrderFormState})
