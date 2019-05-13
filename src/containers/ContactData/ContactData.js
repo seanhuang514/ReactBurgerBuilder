@@ -117,7 +117,11 @@ class ContactData extends Component {
 
     let inputElementOutput = []
     for(const [key, value] of Object.entries(this.state.orderForm)) {
-      inputElementOutput.push(<Input key={key} changed={(event) => this.inputChangedHandler(event, key)} {...value} />)
+      inputElementOutput.push(<Input key={key}
+                                     changed={(event) => this.inputChangedHandler(event, key)}
+                                     invalid={!value.valid}
+                                     shouldValid={value.validation}
+                                     {...value}  />)
     }
 
     return(
