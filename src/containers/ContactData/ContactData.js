@@ -8,11 +8,57 @@ import Input from '../../components/ui/Input/Input'
 
 class ContactData extends Component {
   state = {
-    name: '',
-    email: '',
-    address: {
-      street: '',
-      postalCode: ''
+    orderForm: {
+      name: {
+        elementType: 'input',
+        elementConfig: {
+          type: 'text',
+          placeholder: 'Your Name'
+        },
+        value: 'sean'
+      },
+      street: {
+        elementType: 'input',
+        elementConfig: {
+          type: 'text',
+          placeholder: 'Your Street'
+        },
+        value: 'test street'
+      },
+      country: {
+        elementType: 'input',
+        elementConfig: {
+          type: 'text',
+          placeholder: 'Your Country'
+        },
+        value: 'Taiwan'
+      },
+      zipCode: {
+        elementType: 'input',
+        elementConfig: {
+          type: 'text',
+          placeholder: 'Your zipCode'
+        },
+        value: '12345'
+      },
+      email: {
+        elementType: 'input',
+        elementConfig: {
+          type: 'email',
+          placeholder: 'Your Email'
+        },
+        value: 'sean@email.com'
+      },
+      deliveryMethod: {
+        elementType: 'select',
+        elementConfig: {
+          option: [
+            { value: 'faster', displayValue: 'faster' },
+            { value: 'cheapest', displayValue: 'cheapest' }
+          ]
+        },
+        value: 'sean@email.com'
+      }
     },
     loading: false
   }
@@ -24,17 +70,7 @@ class ContactData extends Component {
 
     const order = {
       ingredients: this.props.ingredients,
-      totalPrice: this.props.totalPrice,
-      customer: {
-        name: 'sean huang',
-        address: {
-          street: 'test street 1',
-          country: 'Taiwan',
-          zipCode: '12345'
-        },
-        email: 'sean.huang@email.com'
-      },
-      deliveryMethod: 'fastest'
+      totalPrice: this.props.totalPrice
     }
 
     axios.post('/orders.json', order)
@@ -52,10 +88,10 @@ class ContactData extends Component {
 
     return(
       <form>
-          <Input inputtype="input" name="name" placeholder="Your name"/>
-          <Input inputtype="input" name="email" placeholder="Your email"/>
-          <Input inputtype="input" name="street" placeholder="Your street"/>
-          <Input inputtype="input" name="postal" placeholder="Your postal code"/>
+          <Input elementType={this.state.orderForm.name.elementType}
+                 elementConfig={this.state.orderForm.name.elementConfig}
+                 value={this.state.orderForm.name.value}/>
+          
           <Button btnType="Success" clicked={this.orderHandler}>ORDER</Button>
         </form>
     )
