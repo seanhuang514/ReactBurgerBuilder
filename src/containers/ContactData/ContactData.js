@@ -57,7 +57,7 @@ class ContactData extends Component {
             { value: 'cheapest', displayValue: 'cheapest' }
           ]
         },
-        value: 'sean@email.com'
+        value: 'faster'
       }
     },
     loading: false
@@ -86,12 +86,14 @@ class ContactData extends Component {
   get form() {
     if(this.state.loading) return <Spinner/>
 
+    let inputElementOutput = []
+    for(const [key, value] of Object.entries(this.state.orderForm)) {
+      inputElementOutput.push(<Input key={key} {...value} />)
+    }
+
     return(
       <form>
-          <Input elementType={this.state.orderForm.name.elementType}
-                 elementConfig={this.state.orderForm.name.elementConfig}
-                 value={this.state.orderForm.name.value}/>
-          
+          {inputElementOutput}
           <Button btnType="Success" clicked={this.orderHandler}>ORDER</Button>
         </form>
     )
