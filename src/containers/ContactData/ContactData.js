@@ -15,7 +15,7 @@ class ContactData extends Component {
           type: 'text',
           placeholder: 'Your Name'
         },
-        value: 'sean'
+        value: ''
       },
       street: {
         elementType: 'input',
@@ -23,7 +23,7 @@ class ContactData extends Component {
           type: 'text',
           placeholder: 'Your Street'
         },
-        value: 'test street'
+        value: ''
       },
       country: {
         elementType: 'input',
@@ -31,7 +31,7 @@ class ContactData extends Component {
           type: 'text',
           placeholder: 'Your Country'
         },
-        value: 'Taiwan'
+        value: ''
       },
       zipCode: {
         elementType: 'input',
@@ -39,7 +39,7 @@ class ContactData extends Component {
           type: 'text',
           placeholder: 'Your zipCode'
         },
-        value: '12345'
+        value: ''
       },
       email: {
         elementType: 'input',
@@ -47,7 +47,7 @@ class ContactData extends Component {
           type: 'email',
           placeholder: 'Your Email'
         },
-        value: 'sean@email.com'
+        value: ''
       },
       deliveryMethod: {
         elementType: 'select',
@@ -57,7 +57,7 @@ class ContactData extends Component {
             { value: 'cheapest', displayValue: 'cheapest' }
           ]
         },
-        value: 'faster'
+        value: ''
       }
     },
     loading: false
