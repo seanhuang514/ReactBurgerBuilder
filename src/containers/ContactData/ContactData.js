@@ -57,7 +57,7 @@ class ContactData extends Component {
             { value: 'cheapest', displayValue: 'cheapest' }
           ]
         },
-        value: ''
+        value: 'faster'
       }
     },
     loading: false
@@ -68,9 +68,16 @@ class ContactData extends Component {
     
     this.setState({ loading: true });
 
+    const formData = {};
+
+    for(let inputIdentity in this.state.orderForm) {
+      formData[inputIdentity] = this.state.orderForm[inputIdentity].value
+    }
+
     const order = {
       ingredients: this.props.ingredients,
-      totalPrice: this.props.totalPrice
+      totalPrice: this.props.totalPrice,
+      orderData: formData
     }
 
     axios.post('/orders.json', order)
@@ -92,9 +99,9 @@ class ContactData extends Component {
     }
 
     return(
-      <form>
+      <form onSubmit={this.orderHandler}>
           {inputElementOutput}
-          <Button btnType="Success" clicked={this.orderHandler}>ORDER</Button>
+          <Button btnType="Success">ORDER</Button>
         </form>
     )
   }
