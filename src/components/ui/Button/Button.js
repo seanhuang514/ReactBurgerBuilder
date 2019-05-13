@@ -5,7 +5,8 @@ const Button = props => {
   const dynamicClass = [classes.Button, classes[props.btnType]].join(' ');
 
   return (
-    <button 
+    <button
+      disabled={props.disabled}
       onClick={props.clicked}
       className={dynamicClass}>
       {props.children}

@@ -85,10 +85,13 @@ class ContactData extends Component {
           ]
         },
         value: 'faster',
+        validation: {},
+        valid: true,
         tocuhed: false
-      }
+      },
     },
-    loading: false
+    loading: false,
+    formIsValid: false
   }
 
   orderHandler = (event) => {
@@ -133,7 +136,7 @@ class ContactData extends Component {
     return(
       <form onSubmit={this.orderHandler}>
           {inputElementOutput}
-          <Button btnType="Success">ORDER</Button>
+          <Button disabled={!this.state.formIsValid} btnType="Success">ORDER</Button>
         </form>
     )
   }
@@ -149,25 +152,36 @@ class ContactData extends Component {
     cloneElementConfig.value = event.target.value;
     cloneElementConfig.valid = this.checkValidity(cloneElementConfig.value, cloneElementConfig.validation)
     cloneElementConfig.touched = true
-    // console.log('valid', cloneElementConfig.valid)
     cloneOrderFormState[inputIdentify] = cloneElementConfig
-    this.setState({orderForm: cloneOrderFormState})
+
+    let formValid = true
+
+    for(let identify in cloneOrderFormState){
+      // console.log('identify',identify, cloneOrderFormState[identify].valid)
+      formValid = cloneOrderFormState[identify].valid
+      if(!formValid) break;
+    }
+
+    // console.log('valid', formValid)
+
+    this.setState({orderForm: cloneOrderFormState, formIsValid: formValid})
   }
 
-  checkValidity(value, rule) {
+  checkValidity(value, rules) {
     let isValid = false;
-
-    if(rule.required) {
+    if(Object.keys(rules).length === 0) return true;
+  
+    if(rules.required) {
       isValid = value.trim() !== ''
     }
 
-    if(rule.minLength) {
+    if(rules.minLength) {
       // console.log(rule.minLength)
-      isValid = value.length >= rule.minLength && isValid
+      isValid = value.length >= rules.minLength && isValid
     }
 
-    if(rule.maxLength) {
-      isValid = value.length <= rule.maxLength && isValid
+    if(rules.maxLength) {
+      isValid = value.length <= rules.maxLength && isValid
     }
 
     return isValid;
