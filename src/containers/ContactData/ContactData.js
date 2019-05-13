@@ -15,7 +15,11 @@ class ContactData extends Component {
           type: 'text',
           placeholder: 'Your Name'
         },
-        value: ''
+        value: '',
+        validation: {
+          required: true
+        },
+        valid: false
       },
       street: {
         elementType: 'input',
@@ -23,7 +27,11 @@ class ContactData extends Component {
           type: 'text',
           placeholder: 'Your Street'
         },
-        value: ''
+        value: '',
+        validation: {
+          required: true
+        },
+        valid: false
       },
       country: {
         elementType: 'input',
@@ -31,7 +39,11 @@ class ContactData extends Component {
           type: 'text',
           placeholder: 'Your Country'
         },
-        value: ''
+        value: '',
+        validation: {
+          required: true
+        },
+        valid: false
       },
       zipCode: {
         elementType: 'input',
@@ -39,7 +51,13 @@ class ContactData extends Component {
           type: 'text',
           placeholder: 'Your zipCode'
         },
-        value: ''
+        value: '',
+        validation: {
+          required: true,
+          minLength: 5,
+          maxLength: 5
+        },
+        valid: false
       },
       email: {
         elementType: 'input',
@@ -47,7 +65,11 @@ class ContactData extends Component {
           type: 'email',
           placeholder: 'Your Email'
         },
-        value: ''
+        value: '',
+        validation: {
+          required: true
+        },
+        valid: false
       },
       deliveryMethod: {
         elementType: 'select',
@@ -115,8 +137,29 @@ class ContactData extends Component {
     /* 必須要在 clone 內層的 object */
     const cloneElementConfig = {...cloneOrderFormState[inputIdentify]}
     cloneElementConfig.value = event.target.value;
+    cloneElementConfig.valid = this.checkValidity(cloneElementConfig.value, cloneElementConfig.validation)
+    // console.log('valid', cloneElementConfig.valid)
     cloneOrderFormState[inputIdentify] = cloneElementConfig
     this.setState({orderForm: cloneOrderFormState})
+  }
+
+  checkValidity(value, rule) {
+    let isValid = false;
+
+    if(rule.required) {
+      isValid = value.trim() !== ''
+    }
+
+    if(rule.minLength) {
+      // console.log(rule.minLength)
+      isValid = value.length >= rule.minLength && isValid
+    }
+
+    if(rule.maxLength) {
+      isValid = value.length <= rule.maxLength && isValid
+    }
+
+    return isValid;
   }
 
   render() {
