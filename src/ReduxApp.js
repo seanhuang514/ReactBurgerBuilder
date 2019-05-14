@@ -3,9 +3,8 @@ import React, { Component } from 'react';
 import Counter from './containers/redux101/Counter/Counter';
 import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
-import reducer from './store/reducer'
-import counterReducer from './store/reducers/counter'
-import resultReducer from './store/reducers/result'
+import counterReducer from './store/redux101/reducers/counter'
+import resultReducer from './store/redux101/reducers/result'
 
 const rootReducer = combineReducers({
   counter: counterReducer,
