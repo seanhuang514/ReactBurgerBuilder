@@ -1,3 +1,5 @@
+import * as actionType from './actions';
+
 const initialState = {
   counter: 0,
   results:[]
@@ -5,7 +7,7 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch(action.type) {
-    case 'INCREMENT':
+    case actionType.INCREMENT:
       /* 
          Object.assign({}, state) same as { ...state }
          those way are not deep clone
@@ -14,28 +16,28 @@ const reducer = (state = initialState, action) => {
       new_state.counter = state.counter + 1
 
       return new_state
-    case 'DECREMENT':
+    case actionType.DECREMENT:
       return {
         ...state,
         counter: state.counter - 1
       }
-    case 'ADD':
+    case actionType.ADD:
       return {
         ...state,
         counter: state.counter + action.value
       }
-    case 'SUBTRACT':
+    case actionType.SUBTRACT:
       return {
         ...state,
         counter: state.counter - action.value
       }
-    case 'STORE_RESULT':
+    case actionType.STORE_RESULT:
       return {
         ...state,
         // immutable way to push element to array and return new array
         results: state.results.concat({ id: new Date(), value: state.counter })
       }
-    case 'DELETE_RESULT':
+    case actionType.DELETE_RESULT:
       /* way1
       const id = 2;
       const new_arr = [...state.results]

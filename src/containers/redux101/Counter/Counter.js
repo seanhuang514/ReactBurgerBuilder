@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import CounterControl from '../../../components/redux101/CounterControl/CounterControl';
 import CounterOutput from '../../../components/redux101//CounterOutput/CounterOutput';
-
+import * as actionType from '../../../store/actions'
 class Counter extends Component {
     state = {
         counter: 0
@@ -65,12 +65,12 @@ const mapDispatchToProps = dispatch => {
       這個 function 可以在 props裡面找到
       會回傳一個 dispatch 的 function並且帶著 type， 
      */
-    onIncrementCounter: () => dispatch({ type: 'INCREMENT' }),
-    onDecrementCounter: () => dispatch({ type: 'DECREMENT' }),
-    onAddCounter: (value) => dispatch({ type: 'ADD', value: value }),
-    onSubtractCounter: (value) => dispatch({ type: 'SUBTRACT', value: value }),
-    onStoreResult: () => dispatch({ type: 'STORE_RESULT' }),
-    onDeleteResult: (resultId) => dispatch({ type: 'DELETE_RESULT', resultId: resultId })
+    onIncrementCounter: () => dispatch({ type: actionType.INCREMENT }),
+    onDecrementCounter: () => dispatch({ type: actionType.DECREMENT }),
+    onAddCounter: (value) => dispatch({ type: actionType.ADD, value: value }),
+    onSubtractCounter: (value) => dispatch({ type: actionType.SUBTRACT, value: value }),
+    onStoreResult: () => dispatch({ type: actionType.STORE_RESULT }),
+    onDeleteResult: (resultId) => dispatch({ type: actionType.DELETE_RESULT, resultId: resultId })
   }
 }
 
