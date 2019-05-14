@@ -14,7 +14,7 @@ class Modal extends Component {
   }
 
   componentWillUpdate () {
-    console.log('[Modal.js] - componentWillUpdate')
+    // console.log('[Modal.js] - componentWillUpdate')
   }
 
   /* won't updated, this.props.show always false */
