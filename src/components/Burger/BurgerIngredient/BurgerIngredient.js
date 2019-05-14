@@ -8,7 +8,7 @@ export const INGREDIENT_LIST = {
   meat: { name: 'meat', price: 2 },
   cheese: { name: 'cheese', price: 1 },
   salad: { name: 'salad', price: 0.5 },
-  bacon: { name: 'bacon', price: 2 },
+  bacon: { name: 'bacon', price: 1.5 },
 }
 
 const BurgerIngredient = props => {
