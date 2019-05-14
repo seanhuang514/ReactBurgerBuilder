@@ -27,7 +27,7 @@ const reducer = (state = initialState, action) => {
   if(action.type === 'SUBTRACT') {
     return {
       ...state,
-      counter: state.counter - 5
+      counter: state.counter - action.value
     }
   }
   return state
