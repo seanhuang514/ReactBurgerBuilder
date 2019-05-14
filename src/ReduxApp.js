@@ -10,7 +10,28 @@ const rootReducer = combineReducers({
   counter: counterReducer,
   result: resultReducer
 })
-const store = createStore(rootReducer)
+
+const logger = store => {
+  /*　在一開始就執行 */
+  console.log('store = ', store) //{getState: ƒ, dispatch: ƒ}
+  return next => {
+    /*　在一開始就執行 */
+    console.log('next = ', next) // ƒ dispatch(action){}
+    return action => {
+      /*　等到有 action dispatch　過來才執行 */
+      console.log('[Middleware] Dispatching = ', action); // {type: "INCREMENT"}
+      console.log('[Middleware] before next state = ', store.getState()); //{counter: {counter: 0}, result: {…}}
+      const result = next(action);
+      console.log('[Middleware] result next(action) = ', result); // {type: "INCREMENT"}
+      console.log('[Middleware] next state = ', store.getState()); //{counter: {counter: 1}, result: {…}}
+      return result;
+    }
+  }
+}
+
+// console.log('applyMiddleware = ', applyMiddleware(logger)); // ƒ (createStore) , return function(){}
+// applyMiddleware 可以帶入多個 middleware, applyMiddleware(logger, logger2, logger 3, ...)
+const store = createStore(rootReducer, applyMiddleware(logger))
 class ReduxApp extends Component {
   
   render() {
