@@ -10,6 +10,7 @@ class ReduxApp extends Component {
   
   render() {
     return (
+      /* 用 Provider component 來包住需要跟 redux 溝通的 component */
       <Provider store={store}>
         <div style={{textAlign: 'center'}}>
         <Counter />
