@@ -1,16 +1,22 @@
 import React, { Component } from 'react';
 
 import Counter from './containers/redux101/Counter/Counter';
-import Redux from 'redux';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import reducer from './store/reducer'
 
-class App extends Component {
+const store = createStore(reducer)
+class ReduxApp extends Component {
+  
   render() {
     return (
-      <div style={{textAlign: 'center'}}>
-       <Counter />
-      </div>
+      <Provider store={store}>
+        <div style={{textAlign: 'center'}}>
+        <Counter />
+        </div>
+      </Provider>
     );
   }
 }
 
-export default App;
+export default ReduxApp;

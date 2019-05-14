@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import { connect } from 'react-redux'
 import CounterControl from '../../../components/redux101/CounterControl/CounterControl';
 import CounterOutput from '../../../components/redux101//CounterOutput/CounterOutput';
 
@@ -26,9 +26,10 @@ class Counter extends Component {
     }
 
     render () {
+      console.log('render', this.props) //{counter: 0, dispatch: ƒ}
         return (
             <div>
-                <CounterOutput value={this.state.counter} />
+                <CounterOutput value={this.props.counter} />
                 <CounterControl label="Increment" clicked={() => this.counterChangedHandler( 'inc' )} />
                 <CounterControl label="Decrement" clicked={() => this.counterChangedHandler( 'dec' )}  />
                 <CounterControl label="Add 5" clicked={() => this.counterChangedHandler( 'add', 5 )}  />
@@ -38,4 +39,19 @@ class Counter extends Component {
     }
 }
 
-export default Counter;
+const mapStateToProps = state => {
+  console.log('[mapStateToProps]', state) // {counter: 0}
+  return {
+    counter: state.counter
+  }
+}
+
+console.log('connect', connect(mapStateToProps)(Counter)) //Symbol(react.memo)
+
+/* 
+用 connect hoc 來連結 redux 跟 component 之間的溝通 
+connect(mapStateToProps) 會 return 一個 function
+然後再呼叫這個 function 一次，並且帶入要 export 的 component
+之後就可以在 props 裡面取到需要的 state
+*/
+export default connect(mapStateToProps)(Counter);
