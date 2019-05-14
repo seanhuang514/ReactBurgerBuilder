@@ -13,7 +13,7 @@ import { connect } from 'react-redux'
 class BurgerBuilder extends Component {
   state = {
     totalPrice: 4,
-    purchaseable: true,
+    purchaseable: false,
     purchasing: false,
     loading: false,
     error: false
@@ -30,48 +30,14 @@ class BurgerBuilder extends Component {
       }); */
   }
 
-  updatePurchaseState(ingredients) {
-    const ingredientsQuantity = Object.values(ingredients).reduce(
+  updatePurchaseState = () => {
+    const ingredientsQuantity = Object.values(this.props.ingredients).reduce(
       (sum, el) => sum + el,
       0
     );
     console.log('ingredientsQuantity', ingredientsQuantity);
-    this.setState({ purchaseable: ingredientsQuantity > 0 });
+    return ingredientsQuantity > 0 
   }
-
-  addIngredientHandler = type => {
-    const oldQuantity = this.props.ingredients[type];
-    const newQuantity = oldQuantity + 1;
-    const newIngredients = { ...this.props.ingredients };
-    newIngredients[type] = newQuantity;
-
-    const oldTotalPrice = this.props.totalPrice;
-    const newTotalPrice = oldTotalPrice + INGREDIENT_LIST[type].price;
-
-    this.setState({ ingredients: newIngredients, totalPrice: newTotalPrice });
-    /* 
-      Do not pass this.props.ingredients to updatePurchaseState
-      because of setState is asynchronous, you might pass old ingredients
-      to updatePurchaseState, so use newIngredients to make sure it is newest ingredients
-    */
-    this.updatePurchaseState(newIngredients);
-  };
-
-  removeIngredientHandler = type => {
-    const oldQuantity = this.props.ingredients[type];
-    const newQuantity = oldQuantity - 1;
-
-    if (newQuantity < 0) return;
-
-    const newIngredients = { ...this.props.ingredients };
-    newIngredients[type] = newQuantity;
-
-    const oldTotalPrice = this.props.totalPrice;
-    const newTotalPrice = oldTotalPrice - INGREDIENT_LIST[type].price;
-
-    this.setState({ ingredients: newIngredients, totalPrice: newTotalPrice });
-    this.updatePurchaseState(newIngredients);
-  };
 
   disabledInfo = () => {
     const disabledInfo = { ...this.props.ingredients };
@@ -127,7 +93,7 @@ class BurgerBuilder extends Component {
           ingredientRemoved={this.props.onIngredientRemoved}
           disabledInfo={this.disabledInfo()}
           totalPrice={this.props.totalPrice}
-          purchaseable={this.state.purchaseable}
+          purchaseable={this.updatePurchaseState()}
           ordered={this.updatePurchasingState}
         />
       </Aux>
