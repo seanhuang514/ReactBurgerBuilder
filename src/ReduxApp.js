@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
 
 import Counter from './containers/redux101/Counter/Counter';
-import { createStore } from 'redux';
+import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import reducer from './store/reducer'
+import counterReducer from './store/reducers/counter'
+import resultReducer from './store/reducers/result'
 
-const store = createStore(reducer)
+const rootReducer = combineReducers({
+  counter: counterReducer,
+  result: resultReducer
+})
+const store = createStore(rootReducer)
 class ReduxApp extends Component {
   
   render() {

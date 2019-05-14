@@ -35,7 +35,7 @@ class Counter extends Component {
                 <CounterControl label="Add 5" clicked={() => this.props.onAddCounter(10)}  />
                 <CounterControl label="Subtract 5" clicked={() => this.props.onSubtractCounter(10)}  />
                 <hr/>
-                <button onClick={this.props.onStoreResult}>Store Result</button>
+                <button onClick={() => this.props.onStoreResult(this.props.counter)}>Store Result</button>
                 <ul>
                   {
                     this.props.storedResults.map(result => {
@@ -49,10 +49,18 @@ class Counter extends Component {
 }
 
 const mapStateToProps = state => {
-  // console.log('[mapStateToProps]', state) // {counter: 0}
+  console.log('[mapStateToProps]', state) // {counter: {counter: 0}, result: {results: Array(0)}}
+  /* 
+    當 combineReducers 把數個 reducer combine 在一起後
+    取 state 的時候要多加一層設定在 combineReducers 的 key 
+    const rootReducer = combineReducers({
+      counter: counterReducer,
+      result: resultReducer
+    })
+  */
   return {
-    counter: state.counter,
-    storedResults: state.results
+    counter: state.counter.counter,
+    storedResults: state.result.results
   }
 }
 
@@ -69,7 +77,7 @@ const mapDispatchToProps = dispatch => {
     onDecrementCounter: () => dispatch({ type: actionType.DECREMENT }),
     onAddCounter: (value) => dispatch({ type: actionType.ADD, value: value }),
     onSubtractCounter: (value) => dispatch({ type: actionType.SUBTRACT, value: value }),
-    onStoreResult: () => dispatch({ type: actionType.STORE_RESULT }),
+    onStoreResult: (result) => dispatch({ type: actionType.STORE_RESULT, result: result }),
     onDeleteResult: (resultId) => dispatch({ type: actionType.DELETE_RESULT, resultId: resultId })
   }
 }
