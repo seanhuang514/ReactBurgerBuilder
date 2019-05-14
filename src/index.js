@@ -6,6 +6,9 @@ import App from './App';
 // import ReduxApp from './ReduxApp';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter } from 'react-router-dom';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import reducer from './store/reducers/reducer';
 
 /* 預設URL */
 // axios.defaults.baseURL = 'https://jsonplaceholder.typicode.com';
@@ -14,10 +17,14 @@ import { BrowserRouter } from 'react-router-dom';
 /* 預設content-type */
 // axios.defaults.headers.post['Content-type'] = 'application/json';
 
+const store = createStore(reducer)
+
 const app = (
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>
+  <Provider store={store}>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </Provider>
   
 )
 
