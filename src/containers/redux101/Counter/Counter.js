@@ -8,23 +8,6 @@ class Counter extends Component {
         counter: 0
     }
 
-    counterChangedHandler = ( action, value ) => {
-        switch ( action ) {
-            case 'inc':
-                this.setState( ( prevState ) => { return { counter: prevState.counter + 1 } } )
-                break;
-            case 'dec':
-                this.setState( ( prevState ) => { return { counter: prevState.counter - 1 } } )
-                break;
-            case 'add':
-                this.setState( ( prevState ) => { return { counter: prevState.counter + value } } )
-                break;
-            case 'sub':
-                this.setState( ( prevState ) => { return { counter: prevState.counter - value } } )
-                break;
-        }
-    }
-
     render () {
       console.log('render', this.props) // {counter: 1, onIncrementCounter: ƒ}
         return (
@@ -32,8 +15,8 @@ class Counter extends Component {
                 <CounterOutput value={this.props.counter} />
                 <CounterControl label="Increment" clicked={this.props.onIncrementCounter} />
                 <CounterControl label="Decrement" clicked={this.props.onDecrementCounter}  />
-                <CounterControl label="Add 5" clicked={() => this.props.onAddCounter(10)}  />
-                <CounterControl label="Subtract 5" clicked={() => this.props.onSubtractCounter(10)}  />
+                <CounterControl label="Add 10" clicked={() => this.props.onAddCounter(10)}  />
+                <CounterControl label="Subtract 10" clicked={() => this.props.onSubtractCounter(10)}  />
                 <hr/>
                 <button onClick={() => this.props.onStoreResult(this.props.counter)}>Store Result</button>
                 <ul>
