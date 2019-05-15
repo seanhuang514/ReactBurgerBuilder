@@ -32,14 +32,15 @@ export const subtract = (value) => {
   }
 }
 
-export const store_result = (result) => {
-  return {
-    type: STORE_RESULT,
-    result: result
+
+export const storeResult = (result) => {
+  const message = { type: STORE_RESULT, result: result};
+  return dispatch => {
+    setTimeout(() => dispatch(message), 2000);
   }
 }
 
-export const delete_result = (resultId) => {
+export const deleteResult = (resultId) => {
   return {
     type: SUBTRACT,
     resultId: resultId

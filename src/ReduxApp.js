@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import Counter from './containers/redux101/Counter/Counter';
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
 import counterReducer from './store/redux101/reducers/counter'
 import resultReducer from './store/redux101/reducers/result'
 
@@ -33,7 +34,7 @@ const logger = store => {
 // applyMiddleware 可以帶入多個 middleware, applyMiddleware(logger, logger2, logger 3, ...)
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const store = createStore(rootReducer, composeEnhancers(applyMiddleware(logger)))
+const store = createStore(rootReducer, composeEnhancers(applyMiddleware(logger, thunk)))
 class ReduxApp extends Component {
   
   render() {
