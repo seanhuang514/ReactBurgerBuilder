@@ -33,7 +33,7 @@ const logger = store => {
 // applyMiddleware 可以帶入多個 middleware, applyMiddleware(logger, logger2, logger 3, ...)
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const store = createStore(rootReducer, applyMiddleware(logger))
+const store = createStore(rootReducer, composeEnhancers(applyMiddleware(logger)))
 class ReduxApp extends Component {
   
   render() {
