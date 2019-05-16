@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import classes from './Checkout.css';
 import CheckoutSummary from '../../components/Order/CheckoutSummary/CheckoutSummary';
 import ContactData from '../ContactData/ContactData';
-import { Route } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 class Checkout extends Component {
@@ -30,6 +30,8 @@ class Checkout extends Component {
   };
 
   render() {
+    if(!this.props.ingredients) return <Redirect to="/"/>
+
     return (
       <div>
         <CheckoutSummary

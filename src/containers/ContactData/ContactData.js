@@ -93,7 +93,6 @@ class ContactData extends Component {
         tocuhed: false
       },
     },
-    loading: false,
     formIsValid: false
   }
 
@@ -116,7 +115,7 @@ class ContactData extends Component {
   }
 
   get form() {
-    if(this.state.loading) return <Spinner/>
+    if(this.props.loading) return <Spinner/>
 
     let inputElementOutput = []
     for(const [key, value] of Object.entries(this.state.orderForm)) {
@@ -194,15 +193,16 @@ class ContactData extends Component {
 const mapStateToProps = state => {
   return {
     ingredients: state.ingredients,
-    totalPrice: state.totalPrice
+    totalPrice: state.totalPrice,
+    loading: state.loading
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    onOrderBurger: (orderData) => dispatch(actions.purchaseBurgerStart)
+    onOrderBurger: (orderData) => dispatch(actions.purchaseBurger(orderData))
   }
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(WithErrorHandler(ContactData)));
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(WithErrorHandler(ContactData, axios)));
