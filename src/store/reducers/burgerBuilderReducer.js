@@ -2,13 +2,9 @@ import * as actionTypes from '../actions/actionTypes'
 import { INGREDIENT_LIST } from '../../components/Burger/BurgerIngredient/BurgerIngredient';
 
 const initialState = {
-  ingredients: {
-    salad: 0,
-    cheese: 0,
-    bacon: 0,
-    meat: 0
-  },
+  ingredients: null,
   totalPrice: 0,
+  error: false
 }
 
 const reducer = (state = initialState, action) => {
