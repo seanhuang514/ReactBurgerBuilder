@@ -1,6 +1,6 @@
 import * as actionTypes from '../actions/actionTypes'
 import { INGREDIENT_LIST } from '../../components/Burger/BurgerIngredient/BurgerIngredient';
-
+import { immutableUpdateState } from '../utilities//utility';
 const initialState = {
   ingredients: null,
   totalPrice: 0,
@@ -11,20 +11,20 @@ const reducer = (state = initialState, action) => {
   
   switch(action.type){
     case actionTypes.ADD_INGREDIENTS: {
-      let ingredientName = action.ingredientName;
+      const ingredientName = action.ingredientName;
       console.log('ingredientName', INGREDIENT_LIST[ingredientName].price)
-      return {
-        ...state,
-        /* copy ingredients from state then override one of attribute */
+      
+      const updateState = {
         ingredients: {
-          ...state.ingredients,
           [ingredientName]: state.ingredients[ingredientName] + 1
         },
         totalPrice: state.totalPrice + INGREDIENT_LIST[ingredientName].price
       }
+      console.log(state, 'vs', updateState)
+      return immutableUpdateState(state, updateState);
     }
     case actionTypes.REMOVE_INGREDIENTS: {
-      let ingredientName = action.ingredientName;
+      const ingredientName = action.ingredientName;
 
       return {
         ...state,
