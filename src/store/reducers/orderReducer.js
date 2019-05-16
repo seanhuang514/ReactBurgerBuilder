@@ -18,6 +18,8 @@ const reducer = (state = initState, action) => {
         id: action.orderId
       };
 
+      console.log('[PURCHASE_BURGER_SUCCESS]', new_order)
+
       return {
         ...state,
         orders: state.orders.concat(new_order),

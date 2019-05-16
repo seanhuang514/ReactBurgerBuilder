@@ -6,10 +6,11 @@ import App from './App';
 // import ReduxApp from './ReduxApp';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter } from 'react-router-dom';
-import { createStore, applyMiddleware, compose } from 'redux';
+import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import burgerBuilderReducer from './store/reducers/burgerBuilderReducer';
+import orderReducer from './store/reducers/orderReducer';
 
 /* 預設URL */
 // axios.defaults.baseURL = 'https://jsonplaceholder.typicode.com';
@@ -17,8 +18,13 @@ import burgerBuilderReducer from './store/reducers/burgerBuilderReducer';
 // axios.defaults.headers.common['Authorization'] = 'Auth token';
 /* 預設content-type */
 // axios.defaults.headers.post['Content-type'] = 'application/json';
+const rootReducer = combineReducers({
+  burgerBuilder: burgerBuilderReducer,
+  orders: orderReducer
+});
+
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const store = createStore(burgerBuilderReducer, composeEnhancers(applyMiddleware(thunk)))
+const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)))
 
 const app = (
   <Provider store={store}>
