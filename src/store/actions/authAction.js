@@ -1,4 +1,6 @@
-import * as actionType from './actionTypes'
+import * as actionType from './actionTypes';
+import axios from 'axios';
+import config from '../../config/config';
 
 export const authStart = () => {
   return {
@@ -23,5 +25,22 @@ export const authFailed = (error) => {
 export const auth = (email, password) => {
   return dispatch => {
     dispatch(authStart());
+    
+    const authURL = `https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyCustomToken?key=[${config.firebase.apiKey}]`
+    const authData = {
+      email: email,
+      password: password,
+      returnSecureToken: true
+    }
+    axios
+      .post(authURL, authData)
+      .then(response => {
+        console.log('[auth]', response);
+        dispatch(authSuccess(response.data))
+      })
+      .catch(error => {
+        dispatch(authFailed(error))
+      })
+    
   }
 }
