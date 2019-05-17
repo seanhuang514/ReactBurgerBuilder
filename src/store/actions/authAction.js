@@ -27,7 +27,7 @@ export const checkAuthTimeOut = (expirationTime) => {
   return dispatch => {
     setTimeout(() => {
       dispatch({ type: actionType.AUTH_LOGOUT })
-    }, 2000)
+    }, expirationTime * 1000)
   }
 }
 

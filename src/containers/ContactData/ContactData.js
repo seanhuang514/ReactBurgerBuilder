@@ -111,7 +111,7 @@ class ContactData extends Component {
       orderData: formData
     }
 
-    this.props.onOrderBurger(order);
+    this.props.onOrderBurger(order, this.props.token);
   }
 
   get form() {
@@ -194,13 +194,14 @@ const mapStateToProps = state => {
   return {
     ingredients: state.burgerBuilder.ingredients,
     totalPrice: state.burgerBuilder.totalPrice,
-    loading: state.orders.loading
+    loading: state.orders.loading,
+    token: state.auth.token
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    onOrderBurger: (orderData) => dispatch(actions.purchaseBurger(orderData))
+    onOrderBurger: (orderData, token) => dispatch(actions.purchaseBurger(orderData, token))
   }
 }
 
