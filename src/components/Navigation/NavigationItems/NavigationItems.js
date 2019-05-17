@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 const NavigationItems = props => (
   <ul className={classes.navigationItems}>
     <NavigationItem link='/'>Burger Builder</NavigationItem>
-    <NavigationItem link='/orders'>Orders</NavigationItem>
+    { props.isAuthenticate ? <NavigationItem link='/orders'>Orders</NavigationItem> : null}
     { props.isAuthenticate
         ? <NavigationItem link='/Logout'>Logout</NavigationItem>
         : <NavigationItem link='/auth'>Authenticate</NavigationItem>}
