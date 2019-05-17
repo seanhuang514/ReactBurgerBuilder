@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import Input from '../../components/ui/Input/Input';
 import Button from '../../components/ui/Button/Button';
 import classes from './Auth.css';
+import * as actions from '../../store/actions/index'
+import { connect } from 'react-redux';
+import { dispatch } from '../../../node_modules/rxjs/internal/observable/pairs';
 
 class Auth extends Component {
   state = {
@@ -12,7 +15,7 @@ class Auth extends Component {
           type: 'email',
           placeholder: 'Mail Address'
         },
-        value: '',
+        value: '1@1.com',
         validation: {
           required: true,
           isEmail: true
@@ -26,7 +29,7 @@ class Auth extends Component {
           type: 'password',
           placeholder: 'Password'
         },
-        value: '',
+        value: '123456',
         validation: {
           required: true,
           minLength: 6
@@ -50,7 +53,7 @@ class Auth extends Component {
     }
 
     return(
-      <form onSubmit={this.orderHandler}>
+      <form onSubmit={this.submitHandler}>
           {inputElementOutput}
           <Button btnType="Success">SUBMIT</Button>
         </form>
@@ -89,16 +92,21 @@ class Auth extends Component {
     }
 
     if (rules.isEmail) {
-      const pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
-      isValid = pattern.test(value) && isValid
-  }
+        const pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
+        isValid = pattern.test(value) && isValid
+    }
 
-  if (rules.isNumeric) {
-      const pattern = /^\d+$/;
-      isValid = pattern.test(value) && isValid
-  }
+    if (rules.isNumeric) {
+        const pattern = /^\d+$/;
+        isValid = pattern.test(value) && isValid
+    }
 
     return isValid;
+  }
+
+  submitHandler = (event) => {
+    event.preventDefault();
+    this.props.onAuth(this.state.controls.email, this.state.controls.password);
   }
 
   render() {
@@ -110,4 +118,10 @@ class Auth extends Component {
   }
 }
 
-export default Auth;
+const mapDispatchToProps = dispatch => {
+  return {
+    onAuth: (email, password) => dispatch(actions.auth(email, password))
+  }
+}
+
+export default connect(null, mapDispatchToProps)(Auth);

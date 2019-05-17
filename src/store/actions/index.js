@@ -9,3 +9,7 @@ export {
   purchaseInit,
   fetchOrders
 } from './orderAction.js'
+
+export { 
+  auth
+} from './authAction.js'
