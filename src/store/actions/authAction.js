@@ -22,16 +22,24 @@ export const authFailed = (error) => {
   }
 }
 
-export const auth = (email, password) => {
+export const auth = (email, password, isSignUp) => {
   return dispatch => {
     dispatch(authStart());
     
-    const authURL = `https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyCustomToken?key=[${config.firebase.apiKey}]`
+    let authURL = `https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=${config.firebase.apiKey}`
+    if(!isSignUp) {
+      authURL = `https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=${config.firebase.apiKey}`
+    }
+
+    console.log('authURL', authURL)
     const authData = {
       email: email,
       password: password,
       returnSecureToken: true
     }
+
+    console.log('authData', authData)
+
     axios
       .post(authURL, authData)
       .then(response => {
