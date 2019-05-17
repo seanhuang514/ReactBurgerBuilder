@@ -33,11 +33,21 @@ const authFailed = (state, action) => {
   return immutableUpdateState(state, updateState);
 }
 
+const authLogout = (state, action) => {
+  const updateState = { 
+    token: null,
+    userId: null
+  };
+
+  return immutableUpdateState(state, updateState);
+}
+
 const authReducer = (state = initState, action) => {
   switch (action.type) {
     case actionTypes.AUTH_START: return authStart(state, action);
     case actionTypes.AUTH_SUCCESS: return authSuccess(state, action);
     case actionTypes.AUTH_FAILED: return authFailed(state, action);
+    case actionTypes.AUTH_LOGOUT: return authLogout(state, action);
     default: return state
   }
 };
