@@ -11,6 +11,7 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import burgerBuilderReducer from './store/reducers/burgerBuilderReducer';
 import orderReducer from './store/reducers/orderReducer';
+import authReducer from './store/reducers/authReducer';
 
 /* 預設URL */
 // axios.defaults.baseURL = 'https://jsonplaceholder.typicode.com';
@@ -20,7 +21,8 @@ import orderReducer from './store/reducers/orderReducer';
 // axios.defaults.headers.post['Content-type'] = 'application/json';
 const rootReducer = combineReducers({
   burgerBuilder: burgerBuilderReducer,
-  orders: orderReducer
+  orders: orderReducer,
+  auth: authReducer
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

@@ -8,10 +8,11 @@ export const authStart = () => {
   }
 }
 
-export const authSuccess = (authData) => {
+export const authSuccess = (idToken, userId) => {
    return {
      type: actionType.AUTH_SUCCESS,
-     authData: authData
+     idToken: idToken,
+     userId: userId
    }
 }
 
@@ -31,20 +32,21 @@ export const auth = (email, password, isSignUp) => {
       authURL = `https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=${config.firebase.apiKey}`
     }
 
-    console.log('authURL', authURL)
+    // console.log('authURL', authURL)
     const authData = {
       email: email,
       password: password,
       returnSecureToken: true
     }
 
-    console.log('authData', authData)
+    // console.log('authData', authData)
 
     axios
       .post(authURL, authData)
       .then(response => {
-        console.log('[auth]', response);
-        dispatch(authSuccess(response.data))
+        const data = response.data
+        // console.log('[auth-data]', data);
+        dispatch(authSuccess(data.idToken, data.localId))
       })
       .catch(error => {
         dispatch(authFailed(error))
