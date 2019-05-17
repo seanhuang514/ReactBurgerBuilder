@@ -11,5 +11,6 @@ export {
 } from './orderAction.js'
 
 export { 
-  auth
+  auth,
+  logout
 } from './authAction.js'
