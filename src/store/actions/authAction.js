@@ -49,7 +49,7 @@ export const auth = (email, password, isSignUp) => {
         dispatch(authSuccess(data.idToken, data.localId))
       })
       .catch(error => {
-        dispatch(authFailed(error))
+        dispatch(authFailed(error.response.data.error))
       })
     
   }

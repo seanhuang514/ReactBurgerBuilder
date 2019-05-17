@@ -4,7 +4,7 @@ import Button from '../../components/ui/Button/Button';
 import classes from './Auth.css';
 import * as actions from '../../store/actions/index'
 import { connect } from 'react-redux';
-import { dispatch } from '../../../node_modules/rxjs/internal/observable/pairs';
+import Spinner from '../../components/ui/Spinner/Spinner';
 
 class Auth extends Component {
   state = {
@@ -59,6 +59,14 @@ class Auth extends Component {
         <Button btnType="Success">SUBMIT</Button>
       </form>
     )
+  }
+
+  errorMessage = () => {
+    if(this.props.error) {
+      return(<p>{this.props.error.message}</p>)
+    }
+
+    return null;
   }
 
   inputChangeHandler = (event, controlName) => {
@@ -119,12 +127,20 @@ class Auth extends Component {
   render() {
     return (
       <div className={classes.auth}>
-        {this.form}
+        {this.errorMessage()}
+        {this.props.loading ? <Spinner/> : this.form}
         <Button btnType="Danger" clicked={this.switchAuthModeHandler}>
           SWITCH TO { this.state.isSignUp ? 'SIGN-IN' : 'SIGN-UP' }
         </Button>
       </div>
     )
+  }
+}
+
+const mapStateToProps = state => {
+  return {
+    loading: state.auth.loading,
+    error: state.auth.error
   }
 }
 
@@ -134,4 +150,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(null, mapDispatchToProps)(Auth);
+export default connect(mapStateToProps, mapDispatchToProps)(Auth);
