@@ -7,14 +7,14 @@ import Auth from './containers/Auth/Auth'
 import Logout from './containers/Auth/Logout/Logout'
 import * as actions from './store/actions/index'
 
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux'
 
 class App extends Component {
   componentDidMount() {
     this.props.onTryAutoSignUp();
   }
-  
+
   render() {
     return(
       <div>
@@ -38,4 +38,4 @@ const mapDispatchToState = dispatch => {
   }
 }
 
-export default connect(null, mapDispatchToState)(App);
+export default withRouter(connect(null, mapDispatchToState)(App));
