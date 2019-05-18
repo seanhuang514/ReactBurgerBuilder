@@ -64,10 +64,12 @@ export const fetchOrdersFailed = (error) => {
   }
 }
 
-export const fetchOrders = (token) => {
+export const fetchOrders = (token, userId) => {
   return dispatch => {
     dispatch(fetchOrdersStart())
-    axios.get('/orders.json?auth=' + token)
+    const path = `/orders.json?auth=${token}&orderBy="userId"&equalTo="${userId}"`
+    console.log('path', path)
+    axios.get(path)
       .then(res => {
         const orders = []
         for(let key in res.data) {
