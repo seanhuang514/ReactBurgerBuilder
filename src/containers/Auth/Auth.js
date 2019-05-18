@@ -71,9 +71,16 @@ class Auth extends Component {
   }
 
   get authRedirect(){
-    if(this.props.isAuthenticate){
-      return <Redirect to="/"/>
-    }else{
+
+    // if(this.props.isAuthenticate && this.props.hasBurger) return <Redirect to="/checkout"/>
+
+    if(this.props.isAuthenticate) {
+      if(this.props.hasBurger){
+        return <Redirect to="/checkout"/>
+      }else {
+        return <Redirect to="/"/>
+      }
+    }else {
       return null
     }
   }
@@ -133,6 +140,10 @@ class Auth extends Component {
     })
   }
 
+  isBuildingBurger = () => {
+    
+  }
+
   render() {
     return (
       <div className={classes.auth}>
@@ -151,7 +162,9 @@ const mapStateToProps = state => {
   return {
     loading: state.auth.loading,
     error: state.auth.error,
-    isAuthenticate: state.auth.token !== null
+    ingredients: state.burgerBuilder.ingredients,
+    isAuthenticate: state.auth.token !== null,
+    hasBurger: state.burgerBuilder.hasBurger,
   }
 }
 

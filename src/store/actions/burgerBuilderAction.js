@@ -15,12 +15,12 @@ export const removeIngredient = name => {
   }
 }
 
-// export const setIngredients = (ingredients) => {
-//   return {
-//     type: actionType.SET_INGREDIENTS,
-//     ingredients: ingredients
-//   }
-// }
+export const setIngredients = (ingredients) => {
+  return {
+    type: actionType.SET_INGREDIENTS,
+    ingredients: ingredients
+  }
+}
 
 export const initIngredients = () => {
   return dispatch => {

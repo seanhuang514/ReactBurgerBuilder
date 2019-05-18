@@ -5,7 +5,8 @@ import { immutableUpdateState } from '../utilities/utility';
 const initialState = {
   ingredients: null,
   totalPrice: 0,
-  error: false
+  error: false,
+  hasBurger: false
 };
 
 const addIngredient = (state, action) => {
@@ -15,23 +16,29 @@ const addIngredient = (state, action) => {
     ingredients: {
       [ingredientName]: state.ingredients[ingredientName] + 1
     },
-    totalPrice: state.totalPrice + INGREDIENT_LIST[ingredientName].price
+    totalPrice: state.totalPrice + INGREDIENT_LIST[ingredientName].price,
   };
-  // console.log(state, 'vs', updateState)
+
+  Object.assign(updateState, { hasBurger: checkHasBurger(updateState.ingredients) })
+
   return immutableUpdateState(state, updateState);
 };
 
 const removeIngredient = (state, action) => {
   const ingredientName = action.ingredientName;
 
-  return {
+  const updateState = {
     ...state,
     ingredients: {
       ...state.ingredients,
       [ingredientName]: state.ingredients[ingredientName] - 1
     },
-    totalPrice: state.totalPrice - INGREDIENT_LIST[ingredientName].price
+    totalPrice: state.totalPrice - INGREDIENT_LIST[ingredientName].price,
   };
+
+  Object.assign(updateState, { hasBurger: checkHasBurger(updateState.ingredients) });
+  
+  return updateState
 }
 
 const setIngredients = (state, action) => {
@@ -50,6 +57,14 @@ const fetchIngredientFailed = (state, action) => {
     ...state,
     error: true
   };
+}
+
+const checkHasBurger = (ingredients) => {
+  const totalAmount = Object.values(ingredients).reduce((total, currentValue) => {
+    return total + currentValue
+  }, 0);
+
+  return totalAmount > 0
 }
 
 const reducer = (state = initialState, action) => {
