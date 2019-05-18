@@ -32,7 +32,7 @@ const WithErrorHandler = (WrappedComponent, axios) => {
     }
 
     render () {
-      console.log('WithErrorHandler', this.props);
+      // console.log('WithErrorHandler', this.props);
 
       return (
         <Aux>

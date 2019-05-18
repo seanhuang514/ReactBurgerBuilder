@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Aux from '../../hoc/Aux/Aux';
 import Burger from '../../components/Burger/Burger';
 import BuilderControls from '../../components/BuilderControls/BuilderControls';
-import { INGREDIENT_LIST } from '../../components/Burger/BurgerIngredient/BurgerIngredient';
 import Modal from '../../components/ui/Model/Modal';
 import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
 import axios from '../../axios-orders';
@@ -28,7 +27,7 @@ class BurgerBuilder extends Component {
       (sum, el) => sum + el,
       0
     );
-    console.log('ingredientsQuantity', ingredientsQuantity);
+    // console.log('ingredientsQuantity', ingredientsQuantity);
     return ingredientsQuantity > 0 
   }
 

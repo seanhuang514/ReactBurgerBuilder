@@ -1,4 +1,4 @@
-import { Map, fromJS } from 'immutable';
+import { fromJS } from 'immutable';
 
 export const updateObject = (oldObject, updateProperties) => {
   return {

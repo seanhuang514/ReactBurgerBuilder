@@ -48,7 +48,7 @@ const setIngredients = (state, action) => {
     error: false
   }
 
-  console.log('state === updateState', state === updateState)
+  // console.log('state === updateState', state === updateState)
   return immutableUpdateState(state, updateState)
 }
 

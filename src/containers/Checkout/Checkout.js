@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import classes from './Checkout.css';
 import CheckoutSummary from '../../components/Order/CheckoutSummary/CheckoutSummary';
 import ContactData from '../ContactData/ContactData';
 import { Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import * as actions from '../../store/actions/index'
 
 class Checkout extends Component {
   /* componentWillMount() {
@@ -32,7 +30,7 @@ class Checkout extends Component {
 
   render() {
     if(!this.props.ingredients) return <Redirect to="/"/>
-    console.log('[CHECKOUT- purchased]', this.props.purchased)
+    // console.log('[CHECKOUT- purchased]', this.props.purchased)
     if(this.props.purchased) return <Redirect to="/"/>
 
     return (
