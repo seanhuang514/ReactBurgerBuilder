@@ -6,6 +6,7 @@ import * as actions from '../../store/actions/index'
 import { connect } from 'react-redux';
 import Spinner from '../../components/ui/Spinner/Spinner';
 import { Redirect } from 'react-router';
+import { checkValidity } from '../../utilities/utility.js';
 
 class Auth extends Component {
   state = {
@@ -91,42 +92,12 @@ class Auth extends Component {
       [controlName]: {
         ...this.state.controls[controlName],
         value: event.target.value,
-        valid: this.checkValidity(event.target.value, this.state.controls[controlName].validation),
+        valid: checkValidity(event.target.value, this.state.controls[controlName].validation),
         touched: true
       }
     }
 
     this.setState({ controls: updatedControls })
-  }
-
-  checkValidity(value, rules) {
-    let isValid = false;
-    if(Object.keys(rules).length === 0) return true;
-  
-    if(rules.required) {
-      isValid = value.trim() !== ''
-    }
-
-    if(rules.minLength) {
-      // console.log(rule.minLength)
-      isValid = value.length >= rules.minLength && isValid
-    }
-
-    if(rules.maxLength) {
-      isValid = value.length <= rules.maxLength && isValid
-    }
-
-    if (rules.isEmail) {
-        const pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
-        isValid = pattern.test(value) && isValid
-    }
-
-    if (rules.isNumeric) {
-        const pattern = /^\d+$/;
-        isValid = pattern.test(value) && isValid
-    }
-
-    return isValid;
   }
 
   submitHandler = (event) => {

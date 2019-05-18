@@ -1,5 +1,5 @@
 import * as actionTypes from '../actions/actionTypes';
-import { immutableUpdateState } from '../utilities/utility';
+import { immutableUpdateState } from '../../utilities/utility';
 
 const initState = {
   token: null,

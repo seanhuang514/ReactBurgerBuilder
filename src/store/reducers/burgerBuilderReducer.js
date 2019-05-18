@@ -1,6 +1,6 @@
 import * as actionTypes from '../actions/actionTypes';
 import { INGREDIENT_LIST } from '../../components/Burger/BurgerIngredient/BurgerIngredient';
-import { immutableUpdateState } from '../utilities/utility';
+import { immutableUpdateState } from '../../utilities/utility';
 
 const initialState = {
   ingredients: null,

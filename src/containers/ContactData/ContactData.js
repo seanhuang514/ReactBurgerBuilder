@@ -8,6 +8,7 @@ import Input from '../../components/ui/Input/Input'
 import { connect } from 'react-redux';
 import WithErrorHandler from '../../hoc//WIthErrorHandler/WithErrorHandler'
 import * as actions from '../../store/actions/index';
+import { checkValidity } from '../../utilities/utility';
 
 class ContactData extends Component {
   state = {
@@ -144,7 +145,7 @@ class ContactData extends Component {
     /* 必須要在 clone 內層的 object */
     const cloneElementConfig = {...cloneOrderFormState[inputIdentify]}
     cloneElementConfig.value = event.target.value;
-    cloneElementConfig.valid = this.checkValidity(cloneElementConfig.value, cloneElementConfig.validation)
+    cloneElementConfig.valid = checkValidity(cloneElementConfig.value, cloneElementConfig.validation)
     cloneElementConfig.touched = true
     cloneOrderFormState[inputIdentify] = cloneElementConfig
 
@@ -159,26 +160,6 @@ class ContactData extends Component {
     // console.log('valid', formValid)
 
     this.setState({orderForm: cloneOrderFormState, formIsValid: formValid})
-  }
-
-  checkValidity(value, rules) {
-    let isValid = false;
-    if(Object.keys(rules).length === 0) return true;
-  
-    if(rules.required) {
-      isValid = value.trim() !== ''
-    }
-
-    if(rules.minLength) {
-      // console.log(rule.minLength)
-      isValid = value.length >= rules.minLength && isValid
-    }
-
-    if(rules.maxLength) {
-      isValid = value.length <= rules.maxLength && isValid
-    }
-
-    return isValid;
   }
 
   render() {
