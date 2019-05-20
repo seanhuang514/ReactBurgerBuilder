@@ -8,19 +8,25 @@ configure({ adapter: new Adapter() })
 
 /* 測 component 不要測 container */
 describe('<NavigationItems/>', () => {
-  let wrapper = null
-
-  beforeEach(() => {
-    wrapper = shallow(<NavigationItems />)
-  })
+  const wrapper = shallow(<NavigationItems />)
 
   it('should render two <NavigationItem/> elements if not authenticated', () => {
     expect(wrapper.find(NavigationItem)).toHaveLength(2)
   });
 
-  it('should render two <NavigationItem/> elements if  authenticated', () => {
-    wrapper.setProps({ isAuthenticate: true })
-    expect(wrapper.find(NavigationItem)).toHaveLength(3)
-  });
+  describe('if authenticated', () => {
+    beforeEach(() => {
+      wrapper.setProps({ isAuthenticate: true })
+    })
+
+    it('should render two <NavigationItem/> elements if  authenticated', () => {     
+      expect(wrapper.find(NavigationItem)).toHaveLength(3)
+    });
+
+    it('should render one <NavigationItem/> for Logout', () => {     
+      const navigationItem = <NavigationItem link='/Logout'>Logout</NavigationItem>
+      expect(wrapper.contains(navigationItem)).toEqual(true)
+    });
+  })
 })
 
