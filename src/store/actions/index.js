@@ -1,3 +1,4 @@
+import { logoutSuccess } from './authAction';
 export {
   addIngredient,
   removeIngredient,
@@ -13,5 +14,6 @@ export {
 export { 
   auth,
   logout,
-  authCheckState
+  authCheckState,
+  logoutSuccess
 } from './authAction.js'
