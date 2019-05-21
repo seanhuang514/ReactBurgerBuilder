@@ -1,6 +1,4 @@
 import * as actionType from './actionTypes';
-import axios from 'axios';
-import config from '../../config/config';
 
 export const authStart = () => {
   return {
@@ -53,21 +51,7 @@ export const auth = (email, password, isSignUp) => {
 }
 
 export const authCheckState = () => {
-  return dispatch => {
-    const token = localStorage.getItem('token');
-    if (!token) {
-      dispatch(logout());
-    }else {
-      const expirationDate = new Date(localStorage.getItem('expirationDate'));
-
-      if (new Date() >= expirationDate){
-        dispatch(logout());
-      }else{
-        const userId = localStorage.getItem('userId')
-        const expirationTime = (expirationDate.getTime() - new Date().getTime()) / 1000
-        dispatch(authSuccess(token, userId));
-        dispatch(checkAuthTimeOut(expirationTime))
-      }
-    }
+  return {
+    type: actionType.AUTH_CHECK_INITIATE_STATE
   }
 }
