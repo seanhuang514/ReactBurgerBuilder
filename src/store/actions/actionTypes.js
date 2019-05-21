@@ -15,3 +15,4 @@ export const AUTH_FAILED = 'AUTH_FAILED';
 export const AUTH_LOGOUT = 'AUTH_LOGOUT';
 export const AUTH_INITIATE_LOGOUT = 'AUTH_INITIATE_LOGOUT';
 export const AUTH_CHECK_TIME_OUT = 'AUTH_CHECK_TIME_OUT';
+export const AUTH_USER = 'AUTH_USER';
