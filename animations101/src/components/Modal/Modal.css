@@ -10,12 +10,18 @@
     top: 30%;
     left: 25%;
     width: 50%;
+    transition: all 0.3s ease-out;
 }
 
 .ModalOpen {
-  display: block;
+  /* diplay 屬性會讓 transition 沒有作用導致動畫不會跑 */
+  /* display: block; */
+  opacity: 1;
+  transform: translateY(0)
 }
 
 .ModalClose {
-  display: none;
+  /* display: none; */
+  opacity: 0;
+  transform: translateY(-200%)
 }
