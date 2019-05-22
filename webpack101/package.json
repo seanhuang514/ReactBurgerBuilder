@@ -2,6 +2,9 @@
   "name": "webpack101",
   "version": "1.0.0",
   "main": "index.js",
+  "script": {
+    "start": "webpack-dev-server"
+  },
   "author": "sean",
   "license": "MIT",
   "devDependencies": {
