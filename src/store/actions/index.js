@@ -8,8 +8,13 @@ export {
 
 export { 
   purchaseBurger,
+  purchaseBurgerStart,
+  purchaseBurgerSuccess,
+  purchaseBurgerFailed,
   purchaseInit,
-  fetchOrders
+  fetchOrders,
+  fetchOrdersStart,
+  fetchOrdersSuccess
 } from './orderAction.js'
 
 export { 
