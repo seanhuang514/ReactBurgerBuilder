@@ -4,9 +4,9 @@ import axios from 'axios';
 import config from '../../config/config.js'
 
 export function* logoutSaga(action) {
-  yield localStorage.removeItem('token');
-  yield localStorage.removeItem('expirationDate');
-  yield localStorage.removeItem('userId');
+  yield call([localStorage,'removeItem'], 'token');
+  yield call([localStorage,'removeItem'], 'expirationDate');
+  yield call([localStorage,'removeItem'], 'userId');
   yield put(actions.logoutSuccess());
 }
 
@@ -33,9 +33,9 @@ export function* authUserSaga(action) {
     const response = yield call(axios.post, authURL, authData)
     const data = response.data
     const expirationDate = new Date(new Date().getTime() + data.expiresIn * 1000)
-    localStorage.setItem('token', data.idToken);
-    localStorage.setItem('expirationDate', expirationDate);
-    localStorage.setItem('userId', data.localId);
+    yield call([localStorage,'setItem'], 'token', data.idToken);
+    yield call([localStorage,'setItem'], 'expirationDate', expirationDate);
+    yield call([localStorage,'setItem'], 'userId', data.localId);
     yield put(actions.authSuccess(data.idToken, data.localId))
     yield put(actions.checkAuthTimeOut(data.expiresIn))
   }catch(error) {
@@ -44,7 +44,7 @@ export function* authUserSaga(action) {
 }
 
 export function* authCheckState(action) {
-  const token = localStorage.getItem('token');
+  const token = yield call([localStorage, 'getItem'], 'token');
   if (!token) {
     yield put(actions.logout());
   }else {
@@ -52,7 +52,7 @@ export function* authCheckState(action) {
     if (new Date() >= expirationDate){
       yield put(actions.logout());
     }else{
-      const userId = localStorage.getItem('userId')
+      const userId = yield call([localStorage, 'getItem'], 'userId');
       const expirationTime = (expirationDate.getTime() - new Date().getTime()) / 1000
       yield put(actions.authSuccess(token, userId));
       yield put(actions.checkAuthTimeOut(expirationTime))
