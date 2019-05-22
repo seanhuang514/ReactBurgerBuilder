@@ -2,12 +2,16 @@
   "name": "webpack101",
   "version": "1.0.0",
   "main": "index.js",
-  "script": {
+  "scripts": {
     "start": "webpack-dev-server"
   },
   "author": "sean",
   "license": "MIT",
   "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.0.6",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
     "webpack": "^3.6.0",
     "webpack-dev-server": "^3.4.1"
   },
