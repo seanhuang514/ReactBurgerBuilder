@@ -1,0 +1,11 @@
+{
+  "name": "webpack101",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "sean",
+  "license": "MIT",
+  "devDependencies": {
+    "webpack": "^3.6.0",
+    "webpack-dev-server": "^3.4.1"
+  }
+}
