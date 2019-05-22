@@ -13,7 +13,7 @@ import createSagaMiddleware from 'redux-saga'
 import burgerBuilderReducer from './store/reducers/burgerBuilderReducer';
 import orderReducer from './store/reducers/orderReducer';
 import authReducer from './store/reducers/authReducer';
-import { watchAuth } from './store/sagas/index'
+import { watchAuth, watchBurgerBuilder } from './store/sagas/index'
 
 /* 預設URL */
 // axios.defaults.baseURL = 'https://jsonplaceholder.typicode.com';
@@ -34,7 +34,8 @@ const sagaMiddleware = createSagaMiddleware();
 
 const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk, sagaMiddleware)))
 
-sagaMiddleware.run(watchAuth)
+sagaMiddleware.run(watchAuth);
+sagaMiddleware.run(watchBurgerBuilder);
 
 const app = (
   <Provider store={store}>

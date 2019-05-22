@@ -1,8 +1,9 @@
-import { logoutSuccess } from './authAction';
 export {
   addIngredient,
   removeIngredient,
-  initIngredients
+  initIngredients,
+  setIngredients,
+  fetchIngredientsFailed
 } from './burgerBuilderAction.js';
 
 export { 
