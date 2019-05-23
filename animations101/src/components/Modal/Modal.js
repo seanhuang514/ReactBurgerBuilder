@@ -16,8 +16,13 @@ const modal = (props) => {
     return classes.join(' ')
   }
 
+  const animationTiming = {
+    enter: 400,
+    exit: 1000
+  }
+
   return (
-    <Transition  mountOnEnter unmountOnExit in={props.show} timeout={400}>
+    <Transition  mountOnEnter unmountOnExit in={props.show} timeout={animationTiming}>
       {state => (
         <div className={dynamicClasses(state)}>
             <h1>A Modal</h1>
